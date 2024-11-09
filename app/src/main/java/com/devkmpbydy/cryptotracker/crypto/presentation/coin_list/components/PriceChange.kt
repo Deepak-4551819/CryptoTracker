@@ -1,7 +1,6 @@
 package com.devkmpbydy.cryptotracker.crypto.presentation.coin_list.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,19 +25,19 @@ import com.devkmpbydy.cryptotracker.crypto.presentation.models.DisplayableNumber
 import com.devkmpbydy.cryptotracker.ui.theme.CryptoTrackerTheme
 import com.devkmpbydy.cryptotracker.ui.theme.greenBackground
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun PriceChange(
     change: DisplayableNumber,
     modifier: Modifier = Modifier
-){
-    val contentColor = if(change. value < 0.0){
+) {
+    val contentColor = if (change.value < 0.0) {
         MaterialTheme.colorScheme.onErrorContainer
     } else {
         Color.Green
     }
 
-    val backgroundColor = if(change. value < 0.0){
+    val backgroundColor = if (change.value < 0.0) {
         MaterialTheme.colorScheme.errorContainer
     } else {
         greenBackground
@@ -51,16 +50,16 @@ fun PriceChange(
             .padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-       Icon(
-           imageVector = if(change.value < 0.0){
-               Icons.Default.KeyboardArrowDown
-           } else {
-               Icons.Default.KeyboardArrowUp
-           },
-           contentDescription = null,
-           modifier = Modifier.size(20.dp),
-           tint = contentColor
-       )
+        Icon(
+            imageVector = if (change.value < 0.0) {
+                Icons.Default.KeyboardArrowDown
+            } else {
+                Icons.Default.KeyboardArrowUp
+            },
+            contentDescription = null,
+            modifier = Modifier.size(20.dp),
+            tint = contentColor
+        )
         Text(
             text = "${change.formatted} %",
             color = contentColor,

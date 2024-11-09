@@ -83,7 +83,7 @@ fun InfoCard(
             modifier = Modifier.align(
                 Alignment.CenterHorizontally
             ),
-            label = "IconAnimation"
+            label = "ValueAnimation"
         ) {formattedText ->
             Text(
                 text = formattedText,

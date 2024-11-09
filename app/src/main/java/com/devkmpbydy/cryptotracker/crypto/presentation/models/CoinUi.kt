@@ -1,9 +1,12 @@
 package com.devkmpbydy.cryptotracker.crypto.presentation.models
 
+import android.icu.text.NumberFormat
+import android.os.Build
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import com.devkmpbydy.cryptotracker.core.presentation.util.getDrawableIdForCoin
 import com.devkmpbydy.cryptotracker.crypto.domain.Coin
-import java.text.NumberFormat
+import com.devkmpbydy.cryptotracker.crypto.presentation.coin_detail.DataPoint
 import java.util.Locale
 
 data class CoinUi(
@@ -11,10 +14,11 @@ data class CoinUi(
     val rank: Int,
     val name: String,
     val symbol: String,
-    val marketCapUsed: DisplayableNumber,
+    val marketCapUsd: DisplayableNumber,
     val priceUsd: DisplayableNumber,
-    val changePercent24hr: DisplayableNumber,
-    @DrawableRes val iconRes: Int
+    val changePercent24Hr: DisplayableNumber,
+    @DrawableRes val iconRes: Int,
+    val coinPriceHistory: List<DataPoint> = emptyList()
 )
 
 data class DisplayableNumber(
@@ -22,6 +26,7 @@ data class DisplayableNumber(
     val formatted: String
 )
 
+@RequiresApi(Build.VERSION_CODES.N)
 fun Coin.toCoinUi(): CoinUi {
     return CoinUi(
         id = id,
@@ -29,14 +34,15 @@ fun Coin.toCoinUi(): CoinUi {
         symbol = symbol,
         rank = rank,
         priceUsd = priceUsd.toDisplayableNumber(),
-        marketCapUsed =  marketCapUsd.toDisplayableNumber(),
-        changePercent24hr = changePercent24Hr.toDisplayableNumber(),
+        marketCapUsd = marketCapUsd.toDisplayableNumber(),
+        changePercent24Hr = changePercent24Hr.toDisplayableNumber(),
         iconRes = getDrawableIdForCoin(symbol)
-
     )
 }
 
-fun Double.toDisplayableNumber(): DisplayableNumber{
+
+@RequiresApi(Build.VERSION_CODES.N)
+fun Double.toDisplayableNumber(): DisplayableNumber {
     val formatter = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
         minimumFractionDigits = 2
         maximumFractionDigits = 2

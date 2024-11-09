@@ -1,8 +1,9 @@
 package com.devkmpbydy.cryptotracker.crypto.presentation.coin_list.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,8 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -83,7 +82,7 @@ fun CoinListItem(
             )
             Spacer(modifier = Modifier.height(8.dp))
             PriceChange(
-                change = coinUi.changePercent24hr
+                change = coinUi.changePercent24Hr
             )
         }
 
@@ -92,6 +91,7 @@ fun CoinListItem(
 }
 
 
+@RequiresApi(Build.VERSION_CODES.N)
 @PreviewLightDark
 @Composable
 private fun CoinListItemPreview(){
@@ -106,6 +106,7 @@ private fun CoinListItemPreview(){
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 internal val previewCoin = Coin(
     id = "bitcoin",
     rank = 1,
@@ -113,4 +114,6 @@ internal val previewCoin = Coin(
     symbol = "BTC",
     marketCapUsd = 1241273958896.75,
     priceUsd = 62828.15,
+    changePercent24Hr =  0.1
+
 ).toCoinUi()
